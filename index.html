@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obtiene coordenadas</title>
+</head>
+
+<body>
+
+    <p>Haz clic en el botón para obtener las coordenadas de tu dispositvo</p>
+    <button onclick="getLocation()">Obtener coordenadas</button>
+    <p id="mapa"></p>
+
+    <script>
+        var mapa = document.getElementById("mapa");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                mapa.innerHTML = "El navegador no dispone de la capacidad de geolocalizacion";
+            }
+        }
+
+        function showPosition(posicion) {
+            //console.log(posicion);
+            mapa.innerHTML = "Latitud: " + posicion.coords.latitude + "<br>" + "Lingitud" + posicion.coords.longitude;
+        }
+    </script>
+
+</body>
+
+</html>
