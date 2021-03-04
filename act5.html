@@ -18,8 +18,6 @@
     <div id="map" class="map"></div>
 
     <script>
-        "use strict"
-
         function iniciaMapa() {
             var propiedades = {
                 center: {
@@ -33,15 +31,38 @@
 
             const map = new google.maps.Map(mapa, propiedades);
 
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    console.log("position");
+
+                    let posicion = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                });
+            }
+
             let posicion = {
                 lat: 21,
                 lng: -101
             };
 
-            const marker = new google.maps.Marker({
+
+            let props = {
                 position: posicion,
                 map,
                 title: "Marker"
+            };
+            const marker = new google.maps.Marker(props);
+
+            map.setCenter(posicion);
+
+            const infowindow = new google.maps.infoWindow({
+                content: "AAAAAAAAA"
+            });
+
+            marker.addListener("click", () => {
+                infowindow.open(map, marker);
             });
         }
     </script>
