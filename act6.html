@@ -60,7 +60,7 @@
                 moverPosicion(marker);
             }
 
-            function moverPosition(marker){
+            function moverPosicion(marker){
                 navigator.geolocation.getCurrentPosition(posicion => {
                     var pos = {
                         lat: posicion.coords.latitude,
