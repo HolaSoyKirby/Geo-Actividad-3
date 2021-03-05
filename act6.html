@@ -40,7 +40,7 @@
             zoom: 20
         };
 
-        function iniciaMapa(){
+        function iniciaMapa() {
             map = new google.maps.Map(document.getElementById("map"), propiedades);
 
             var icono = {
@@ -50,26 +50,26 @@
                 anchor: new google.maps.Point(0, 0)
             }
 
-            var marker= new google.maps.Marker({
-                position:  coordenadas,
+            var marker = new google.maps.Marker({
+                position: coordenadas,
                 icon: icono,
                 map: map
             });
 
-            if(navigator.geolocation){
+            if (navigator.geolocation) {
                 moverPosicion(marker);
             }
+        }
 
-            function moverPosicion(marker){
-                navigator.geolocation.getCurrentPosition(posicion => {
-                    var pos = {
-                        lat: posicion.coords.latitude,
-                        lng: posicion.coords.longitude
-                    };
+        function moverPosicion(marker) {
+            navigator.geolocation.getCurrentPosition(posicion => {
+                var pos = {
+                    lat: posicion.coords.latitude,
+                    lng: posicion.coords.longitude
+                };
 
-                    marker.setPosition(new google.maps.LatLng(pos.lat, pos.lng));
-                })
-            }
+                marker.setPosition(new google.maps.LatLng(pos.lat, pos.lng));
+            })
         }
     </script>
 
