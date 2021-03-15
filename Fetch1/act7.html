@@ -15,7 +15,7 @@
         var paises = document.getElementById('paises');
         fetch('./datos.json').then(function (response) {
                 response.json().then(function (datos) {
-                    datos.array.forEach(registro => {
+                    datos.forEach(registro => {
                         console.log(registro);
                         let nombre = document.createElement('p');
                         nombre.textContent = `País: ${registro.country}, casos: ${registro.casos}`;
