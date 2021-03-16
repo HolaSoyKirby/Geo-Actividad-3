@@ -1,5 +1,4 @@
-[
-    {
+[{
         "country": "Mexico",
         "cases": 28
     },
@@ -8,7 +7,7 @@
         "cases": 200
     },
     {
-        "country": "colombia",
+        "country": "Colombia",
         "cases": 196
     }
 ]
