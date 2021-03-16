@@ -36,7 +36,7 @@
 
 
         function iniciaMapa() {
-            fetch('paises.json').then(function (response) {
+            fetch('./paises.json').then(function (response) {
                     response.json().then(function (datos) {
                         const map = new google.maps.Map(document.getElementById('map'), propiedades);
                         console.log(datos);
