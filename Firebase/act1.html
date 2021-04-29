@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase</title>
+
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    
+    <style>
+        body {
+            background-color: black;
+            color: rgb(211, 211, 211);
+        }
+
+        input {
+            background-color: black;
+            color: rgb(211, 211, 211);
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: green 2px solid;
+            width: 300px;
+            height: 40px;
+            font-size: 24px;
+        }
+
+        ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: green;
+            opacity: 1;
+            transition: 0.5s;
+            /* Firefox */
+        }
+
+        :-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: green;
+            opacity: 1;
+            transition: 0.5s;
+        }
+
+        ::-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: green;
+            opacity: 1;
+            transition: 0.5s;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input:focus::placeholder {
+            color: rgb(211, 211, 211);
+            transition: 0.5s;
+        }
+
+        :-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: rgb(211, 211, 211);
+            transition: 0.5s;
+        }
+
+        ::-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: rgb(211, 211, 211);
+            transition: 0.5s;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            opacity: 0.5;
+        }
+
+        button {
+            background-color: black;
+            border-radius: 3px;
+            height: 40px;
+            width: 150px;
+            transition: 0.5s;
+        }
+
+        button:hover{
+            color: white;
+            transition: 0.5s;
+        }
+
+        .btnAgregar {
+            border-color: green;
+            color: rgb(0, 180, 0);
+            
+            
+        }
+
+        .btnAgregar:hover {
+            background: black linear-gradient(180deg, rgba(2,0,36,1) 57%, rgba(9,170,0,1) 100%);
+        }
+
+        .btnBorrar {
+            border-color: red;
+            color: red;
+        }
+
+        .btnBorrar:hover{
+            background: black linear-gradient(180deg, rgba(2,0,36,1) 57%, rgba(170,0,0,1) 100%);        }
+
+        span {
+font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12" style="margin-bottom: 10px;">
+                    <h1>Lista de productos</h1>
+                </div>
+            </div>
+            <form id="forma">
+                <div class="row">
+                    <div class="col-12 col-md-4 py-2">
+                        <input type="text" name="nombre" required placeholder="Nombre">
+                    </div>
+                    <div class="col-12 col-md-4 py-2">
+                        <input type="number" step="any" name="codigo" required placeholder="Código">
+                    </div>
+                    <div class="col-12 col-md-4 py-2">
+                        <button type="submit" class="btnAgregar">AGREGAR</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 p-2">
+                    <ul id="lista" class="list-group"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyBubtP66dLDJEGTeLetmX-6dDEZij9MuoA",
+            authDomain: "act1-57438.firebaseapp.com",
+            projectId: "act1-57438",
+            storageBucket: "act1-57438.appspot.com",
+            messagingSenderId: "318216295615",
+            appId: "1:318216295615:web:1108fa1aa54d536521e20a"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const db = firebase.firestore()
+        const productoslista = document.querySelector("#lista");
+
+        const formulario = document.querySelector("#forma");
+
+
+
+        function renderProductos(doc) {
+            let li = document.createElement("li");
+            let nombre = document.createElement("span");
+            let codigo = document.createElement("span");
+            let borrar = document.createElement("button")
+
+            borrar.className = "btnBorrar m-3";
+
+            nombre.textContent = doc.data().nombre + " ";
+            codigo.textContent = doc.data().codigo + " ";
+            borrar.textContent = "BORRAR";
+
+            li.setAttribute("id", doc.id);
+            li.appendChild(borrar);
+            li.appendChild(nombre);
+            li.appendChild(codigo);
+
+            productoslista.appendChild(li);
+
+            borrar.addEventListener("click", (e) => {
+                let id = e.target.parentElement.getAttribute("id");
+                db.collection("productos").doc(id).delete();
+            });
+
+
+
+
+        }
+
+        formulario.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            db.collection('productos').add({
+                nombre: formulario.nombre.value,
+                codigo: formulario.codigo.value
+            });
+
+            formulario.nombre.value = '';
+            formulario.codigo.value = '';
+
+        });
+
+
+        db.collection('productos').onSnapshot(snapshot => {
+            let changes = snapshot.docChanges();
+
+            changes.forEach(change => {
+
+
+                if (change.type == 'added') {
+                    renderProductos(change.doc)
+                } else if (change.type = "removed") {
+
+                    console.log(change.doc.id);
+
+                    let valorid = document.getElementById(change.doc.id);
+                    lista.removeChild(valorid)
+
+
+                }
+
+
+            });
+
+            console.log(changes)
+
+        });
+    </script>
+
+    <!--FIRESTORE-->
+    <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-firestore.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+        integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+    </script>
+
+</body>
+
+</html>
