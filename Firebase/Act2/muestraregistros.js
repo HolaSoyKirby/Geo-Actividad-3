@@ -28,7 +28,6 @@ function muestraRegistros(doc){
 
     let editar = document.createElement("button");
     editar.className = "btnAgregar m-3";
-    editar.textContent = "Editar  ";
     editar.setAttribute("data-toggle", "modal");
     editar.setAttribute("data-target", "#ventanaeditar");
 
