@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase</title>
+    <title>Firebase 1</title>
 
     <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
@@ -32,7 +32,7 @@
             font-size: 24px;
         }
 
-        ::placeholder {
+        ::placeholder, :-ms-input-placeholder, ::-ms-input-placeholder {
             /* Chrome, Firefox, Opera, Safari 10.1+ */
             color: green;
             opacity: 1;
@@ -40,37 +40,11 @@
             /* Firefox */
         }
 
-        :-ms-input-placeholder {
-            /* Internet Explorer 10-11 */
-            color: green;
-            opacity: 1;
-            transition: 0.5s;
-        }
-
-        ::-ms-input-placeholder {
-            /* Microsoft Edge */
-            color: green;
-            opacity: 1;
-            transition: 0.5s;
-        }
-
         input:focus {
             outline: none;
         }
 
         input:focus::placeholder {
-            color: rgb(211, 211, 211);
-            transition: 0.5s;
-        }
-
-        :-ms-input-placeholder {
-            /* Internet Explorer 10-11 */
-            color: rgb(211, 211, 211);
-            transition: 0.5s;
-        }
-
-        ::-ms-input-placeholder {
-            /* Microsoft Edge */
             color: rgb(211, 211, 211);
             transition: 0.5s;
         }
