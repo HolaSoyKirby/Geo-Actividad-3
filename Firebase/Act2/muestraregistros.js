@@ -10,12 +10,14 @@ function muestraRegistros(doc){
     nombre.value = registro.nombre;
     nombre.style.width = '100%';
     nombre.readOnly = true;
+    nombre.style.border = 'none';
 
     let codigo = document.createElement("input");
     codigo.type = "text";
     codigo.value = registro.codigo;
     codigo.style.width = '100%';
     codigo.readOnly = true;
+    codigo.style.marginBottom = '40px';
 
     let borrar = document.createElement("button");
     borrar.className = "btnBorrar m-3";
