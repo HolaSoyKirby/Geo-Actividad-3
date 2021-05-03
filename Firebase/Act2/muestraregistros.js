@@ -21,13 +21,20 @@ function muestraRegistros(doc){
 
     let borrar = document.createElement("button");
     borrar.className = "btnBorrar m-3";
-    borrar.textContent = "Borrar  ";
+
+    let i1 = document.createElement("i");
+    i1.className = "fas fa-minus-square";
+    borrar.innerHTML = `Borrar  ${i1.outerHTML}`;
 
     let editar = document.createElement("button");
     editar.className = "btnAgregar m-3";
     editar.textContent = "Editar  ";
     editar.setAttribute("data-toggle", "modal");
     editar.setAttribute("data-target", "#ventanaeditar");
+
+    let i2 = document.createElement("i");
+    i2.className = "fas fa-edit";
+    editar.innerHTML = `Editar  ${i2.outerHTML}`;
 
     let divChido1 = document.createElement("div");
     divChido1.appendChild(nombre);
