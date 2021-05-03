@@ -92,9 +92,7 @@
         }
     </style>
 </head>
-
 <body>
-
 
     <div class="container-fluid py-5">
         <div class="container">
@@ -119,7 +117,6 @@
         </div>
     </div>
 
-
     <div class="container-fluid py-5">
         <div class="container">
             <div class="row">
@@ -131,7 +128,7 @@
     </div>
 
     <script>
-        var firebaseConfig = {
+        const firebaseConfig = {
             apiKey: "AIzaSyBubtP66dLDJEGTeLetmX-6dDEZij9MuoA",
             authDomain: "act1-57438.firebaseapp.com",
             projectId: "act1-57438",
@@ -147,8 +144,6 @@
         const productoslista = document.querySelector("#lista");
 
         const formulario = document.querySelector("#forma");
-
-
 
         function renderProductos(doc) {
             let li = document.createElement("li");
@@ -173,10 +168,6 @@
                 let id = e.target.parentElement.getAttribute("id");
                 db.collection("productos").doc(id).delete();
             });
-
-
-
-
         }
 
         formulario.addEventListener('submit', (e) => {
@@ -224,5 +215,4 @@
     </script>
 
 </body>
-
 </html>
