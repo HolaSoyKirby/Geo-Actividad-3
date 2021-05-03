@@ -32,7 +32,9 @@
             font-size: 24px;
         }
 
-        ::placeholder, :-ms-input-placeholder, ::-ms-input-placeholder {
+        ::placeholder,
+        :-ms-input-placeholder,
+        ::-ms-input-placeholder {
             /* Chrome, Firefox, Opera, Safari 10.1+ */
             color: green;
             opacity: 1;
@@ -92,6 +94,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container-fluid py-5">
@@ -180,16 +183,12 @@
 
             formulario.nombre.value = '';
             formulario.codigo.value = '';
-
         });
-
 
         db.collection('productos').onSnapshot(snapshot => {
             let changes = snapshot.docChanges();
 
             changes.forEach(change => {
-
-
                 if (change.type == 'added') {
                     renderProductos(change.doc)
                 } else if (change.type = "removed") {
@@ -198,15 +197,9 @@
 
                     let valorid = document.getElementById(change.doc.id);
                     lista.removeChild(valorid)
-
-
                 }
-
-
             });
-
             console.log(changes)
-
         });
     </script>
 
@@ -215,4 +208,5 @@
     </script>
 
 </body>
+
 </html>
