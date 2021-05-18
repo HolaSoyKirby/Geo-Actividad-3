@@ -1,0 +1,287 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practica 15</title>
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        img {
+            width: 80%;
+        }
+
+        .logged-in,
+        .logged-out {
+            display: none;
+        }
+
+        .txtInput {
+            background-color: black;
+            color: white;
+            border-color: white;
+            transition: 0.5s;
+        }
+
+        .txtInput:hover{
+            border-color: rgb(255, 255, 0);
+        }
+
+        .txtInput:focus {
+            background-color: black;
+            border-color: rgb(255, 115, 0);
+            color: white;
+            transition: 0.5s;
+        }
+
+        .btnAceptar {
+            border-width: 2px;
+            color: blue;
+            border-color: blue;
+            transition: 0.5s;
+        }
+
+        .btnAceptar:hover {
+            background-color: black;
+            color: white;
+            border-color: rgb(0, 0, 122);
+            transition: 0.5s;
+        }
+
+        .btnRed {
+            color: rgb(255, 92, 92);
+            border-width: 2px;
+            border-color: rgb(255, 92, 92);
+            transition: 0.5s;
+        }
+
+        .btnRed:hover {
+            color: white;
+            border-color: rgb(255, 34, 34);
+            background-color: black;
+            transition: 0.5s;
+        }
+
+        .btnCerrar {
+            color: grey;
+            border-color: grey;
+            border-width: 2px;
+            transition: 0.5s;
+        }
+
+        .btnCerrar:hover {
+            color: white;
+            background-color: black;
+            transition: 0.5s;
+            border-color: rgb(85, 85, 85);
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DLS EATS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link logged-in" href="#" data-toggle="modal" data-target="#micuentamodal">Mi
+                    Cuenta</a>
+                <a class="nav-item nav-link logged-in" href="#" id="salir">Salir</a>
+                <a class="nav-item nav-link logged-out" href="#" data-toggle="modal"
+                    data-target="#ingresarmodal">Ingresar</a>
+                <a class="nav-item nav-link logged-out" href="#" data-toggle="modal"
+                    data-target="#registratemodal">Regístrate</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal Ingresar -->
+    <div class="modal fade" id="ingresarmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="background-color: black;">
+        <div class="modal-dialog" role="document" style="background-color: black;">
+            <div class="modal-content" style="background-color: black;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ingresarModalLabel">Ingresar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formaingresar">
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="email" class="form-control txtInput" required id="correo"
+                                    placeholder="Ingrese su correo electrónico">
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="password" class="form-control txtInput" required id="contrasena"
+                                    placeholder="Ingrese su contraseña">
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-outline-primary btnAceptar" value="Ingresar">
+                                <p class="error text-danger"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <span onclick="entrarGoogle()" class="btn btn-outline-danger btnRed">Continuar con Gmail <i
+                                class="fas fa-plus"></i></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btnCerrar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Registrate -->
+    <div class="modal fade" id="registratemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="background-color: black;">
+        <div class="modal-dialog" role="document" style="background-color: black;">
+            <div class="modal-content" style="background-color: black;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registrateModalLabel">Registrarse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formaregistrate" autocomplete="off">
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="text" class="form-control txtInput" id="rnombre" required
+                                    placeholder="Ingrese su nombre completo">
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="email" class="form-control txtInput" id="rcorreo" required
+                                    placeholder="Ingrese su correo electrónico">
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="password" class="form-control txtInput" id="rcontrasena" required
+                                    placeholder="Ingrese su contraseña">
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="number" step="any" class="form-control txtInput" id="rtelefono" required
+                                    placeholder="Ingrese su teléfono">
+                            </div>
+                        </div>
+                        <div class="row m-2">
+                            <div class="col-12">
+                                <input type="text" class="form-control txtInput" id="rdireccion" required
+                                    placeholder="Ingrese su dirección">
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-outline-primary btnAceptar" value="Registrarse">
+                                <p class="error text-danger"></p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btnCerrar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal MiCuenta -->
+    <div class="modal fade" id="micuentamodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true" style="background-color: black;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: black;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="micuentaModalLabel">Mi Cuenta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row m-2">
+                        <div class="col-12 datosdelacuenta">
+                            Aquí va la info de su cuenta
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary btnCerrar" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row text-center" id="listadeplatillos">
+        </div>
+    </div>
+
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBubtP66dLDJEGTeLetmX-6dDEZij9MuoA",
+            authDomain: "act1-57438.firebaseapp.com",
+            projectId: "act1-57438",
+            storageBucket: "act1-57438.appspot.com",
+            messagingSenderId: "318216295615",
+            appId: "1:318216295615:web:1108fa1aa54d536521e20a"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+
+        const db = firebase.firestore();
+    </script>
+
+    <script src="scripts/autorizacion.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/micuenta.js"></script>
+
+</body>
+
+</html>
